@@ -1,128 +1,80 @@
 <template>
-  <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
-    <main>
-      <div class="left-side">
-        <span class="title">
-          Welcome to your new project!
-        </span>
-        <system-information></system-information>
-      </div>
-
-      <div class="right-side">
-        <div class="doc">
-          <div class="title">Getting Started</div>
-          <p>
-            electron-vue comes packed with detailed documentation that covers everything from
-            internal configurations, using the project structure, building your application,
-            and so much more.
-          </p>
-          <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs</button><br><br>
+  <v-container fluid="fluid" class="text-xs-center">
+    <v-layout row wrap>
+      <v-flex xs4 offset-xs4>
+        <img id="logo" src="~@/assets/logo.png" alt="mytribe">
+      </v-flex>
+      <v-flex xs4 offset-xs4>
+        <p class="text-md-center">
+          <span class="sub-heading">Connect with your tribe now</span>
+        </p>
+        <div>
+          <v-text-field v-model="username" name="username" label="Choose your name" value="" class="input-group--focused"></v-text-field>
+          <v-text-field v-model="roomname" name="roomname" label="Choose your secret tribe name" value="" class="input-group--focused"></v-text-field>
         </div>
-        <div class="doc">
-          <div class="title alt">Other Documentation</div>
-          <button class="alt" @click="open('https://electron.atom.io/docs/')">Electron</button>
-          <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
-        </div>
-      </div>
-    </main>
-  </div>
+      </v-flex>
+      <v-flex xs12 sm6 offset-sm3>
+        <v-card class="elevation-0">
+          <v-card-text>
+            <div>
+              <v-btn success dark @click="start()">Connect</v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-  import SystemInformation from './LandingPage/SystemInformation';
-
-  export default {
-    name: 'landing-page',
-    components: { SystemInformation },
-    methods: {
-      open(link) {
-        this.$electron.shell.openExternal(link);
-      },
+export default {
+  name: 'landing-page',
+  components: {},
+  data() {
+    return {
+      username: '',
+      roomname: '',
+    };
+  },
+  methods: {
+    start() {
+      console.log(`Going to start the call from ${this.username} to tribe ${this.roomname}`);
+      this.$router.push(`/${this.username}/calling/tribe/${this.roomname}`);
     },
-  };
+  },
+};
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  body { font-family: 'Source Sans Pro', sans-serif; }
+::-webkit-scrollbar {
+  width: 0px;
+  /* remove scrollbar space */
+  background: transparent;
+  /* optional: just make scrollbar invisible */
+}
 
-  #wrapper {
-    background:
-      radial-gradient(
-        ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(229, 229, 229, .9) 100%
-      );
-    height: 100vh;
-    padding: 60px 80px;
-    width: 100vw;
-  }
 
-  #logo {
-    height: auto;
-    margin-bottom: 20px;
-    width: 420px;
-  }
+/* optional: show position indicator in red */
 
-  main {
-    display: flex;
-    justify-content: space-between;
-  }
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}
 
-  main > div { flex-basis: 50%; }
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
 
-  .left-side {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .welcome {
-    color: #555;
-    font-size: 23px;
-    margin-bottom: 10px;
-  }
-
-  .title {
-    color: #2c3e50;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 6px;
-  }
-
-  .title.alt {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .doc p {
-    color: black;
-    margin-bottom: 10px;
-  }
-
-  .doc button {
-    font-size: .8em;
-    cursor: pointer;
-    outline: none;
-    padding: 0.75em 2em;
-    border-radius: 2em;
-    display: inline-block;
-    color: #fff;
-    background-color: #4fc08d;
-    transition: all 0.15s ease;
-    box-sizing: border-box;
-    border: 1px solid #4fc08d;
-  }
-
-  .doc button.alt {
-    color: #42b983;
-    background-color: transparent;
-  }
+#logo {
+  height: auto;
+  margin-bottom: 20px;
+  width: 35vw;
+}
 </style>

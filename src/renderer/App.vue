@@ -1,15 +1,19 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <v-app>
+    <main>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </main>
+  </v-app>
 </template>
 
 <script>
-  export default {
-    name: 'mytribe',
-  };
+export default {
+  name: 'MyTribe',
+};
 </script>
 
 <style>
-  /* CSS */
+/* CSS */
 </style>

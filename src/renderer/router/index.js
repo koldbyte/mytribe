@@ -11,6 +11,11 @@ export default new Router({
       component: require('@/components/LandingPage'),
     },
     {
+      path: '/:username/calling/tribe/:roomname',
+      name: 'call',
+      component: require('@/components/CallPage'),
+    },
+    {
       path: '*',
       redirect: '/',
     },
